@@ -22,7 +22,7 @@ function Home() {
     return (
         <div className="col">
             <div className="center row">
-                <h1 className="mint-green-bg no-bot-margin">Welcome to SoundSynddsc</h1>
+                <h1 className="mint-green-bg no-bot-margin">Welcome to SoundSync</h1>
             </div>
             <div className="row black-bg main-content">
                 <div className="col center show-right-border">
