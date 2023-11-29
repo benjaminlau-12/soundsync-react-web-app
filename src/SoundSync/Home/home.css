@@ -1,0 +1,37 @@
+.center {
+    justify-content: center;
+    text-align: center;
+}
+.mint-green-bg {
+    background-color: #3EB489;
+}
+
+.main-content {
+    height: 600px;
+}
+
+.white {
+    color: white;
+}
+
+.black-bg {
+    background-color: black;
+}
+
+.no-bot-margin {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.padding-top-10px {
+    padding-top: 10px;
+}
+
+.show-right-border {
+    border-right: 4px solid #3EB489;
+}
+
+.song-options {
+    background-color: #3EB489;
+}

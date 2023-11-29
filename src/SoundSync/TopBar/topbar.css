@@ -1,0 +1,64 @@
+.topbar {
+    width: 110%;
+    background-color: black;
+    margin-right: 0;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.remove-bullet {
+    list-style: none;
+}
+
+.menu-options {
+    margin-left: 10px;
+    color: white;
+}
+
+.home-margin {
+    /* align-items: left; */
+    margin-left: 20px;
+}
+
+.home-margin a > svg {
+    color: white;
+}
+
+.topbar div a > svg {
+    font-size: 20px;
+}
+
+.login {
+    margin-right: 150px;
+}
+
+.login a {
+    color: white;
+}
+
+.login svg {
+    margin-right: 5px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-flex > svg {
+    margin-top: 7px;
+    margin-left: 5px;
+    width: 20px;
+    height: 30px;
+    color: white;
+}
+
+.search > svg {
+    font-size: 20px;
+}
