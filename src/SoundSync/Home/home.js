@@ -29,15 +29,15 @@ function Home() {
                     <h4 className="white padding-top-10px">Explore What Other Users Like!</h4>
                 </div>
                 <div className="col center">
-                    <h4 className="white padding-top-10px">Explore New Songs!</h4>
+                    <h2 className="white padding-top-10px">Explore New Songs!</h2>
                     {songs.map((link, index) => (
                     <li className={"mint-green-bg form-control"}>
                         <div onClick={() => handleClick(link)}
                             className={`row ${link === "Account" ?
                                 "account-icon" : "menu-icon"}`}>
-                            <h2>
+                            <h3>
                                 {link.name}
-                            </h2>
+                            </h3>
                         </div>
 
                     </li>
