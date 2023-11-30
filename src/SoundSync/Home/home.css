@@ -2,12 +2,13 @@
     justify-content: center;
     text-align: center;
 }
+
 .mint-green-bg {
     background-color: #3EB489;
 }
 
 .main-content {
-    height: 600px;
+    height: 500px;
 }
 
 .white {
@@ -20,7 +21,7 @@
 
 .no-bot-margin {
     margin-bottom: 0;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
     padding-top: 5px;
 }
 
@@ -28,10 +29,67 @@
     padding-top: 10px;
 }
 
+.border-radius-120px {
+    border-radius: 120px; 
+    border-bottom-left-radius: 120px !important;
+}
+
 .show-right-border {
-    border-right: 4px solid #3EB489;
+    border-right: 20px solid #3EB489;
+}
+
+.show-left-border {
+    border-left: 20px solid #3EB489;
+    border-radius: 120px; 
+}
+
+.show-bot-border {
+    border-bottom: 4px solid #3EB489;
 }
 
 .song-options {
-    background-color: #3EB489;
+    margin-left: -3px;
+    border-radius: 0px !important;
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid transparent !important;
+    /* Set initial border to transparent */
+    transition: border 0.3s;
+    /* Adding a transition for smooth effect */
+    align-content: left;
 }
+
+.song-options:hover {
+    border-color: #3EB489 !important;
+    background-color: rgb(85, 83, 83) !important;
+    /* Change border color when hovered */
+}
+
+.explore-section-title h4 > svg {
+    margin-left: 10px;
+}
+
+.margin-bottom-px {
+    margin-bottom: -100px;
+}
+
+.margin-top-px {
+    margin-top: -100px;
+}
+
+.bottom-section {
+    height: 200px;
+}
+.left-margin-5px {
+    margin-left: 5px;
+}
+.left-margin-10px {
+    margin-left: 10px;
+}
+.left-margin-30px {
+    margin-left: 30px;
+}
+.left-margin-80px {
+    margin-left: 80px;
+}
+
