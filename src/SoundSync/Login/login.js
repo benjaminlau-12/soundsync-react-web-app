@@ -99,12 +99,12 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  className={`link-button ${isSigningUp ? "hidden" : ""}`}
+                  className={`link-button`}
                   onClick={() => {
-                    setIsSigningUp(true);
+                    setIsSigningUp(!isSigningUp);
                   }}
                 >
-                  Sign up
+                  {isSigningUp ? "Log in" : "Sign up"}
                 </button>
               </div>
               <button type="submit" className="mt-3 btn-success btn btn-rounded">
