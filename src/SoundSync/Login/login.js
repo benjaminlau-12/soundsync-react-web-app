@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { switchLoading } from "../../redux/loading";
 import LoadingScreen from "../LoadingScreen/loading";
+import { signin, signup } from "./client";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,19 +15,18 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
     if (isSigningUp) {
-      // post login data to server db
-      const newUser = {
-        username: event.target.name.value,
-        email: event.target.username.value,
-        password: event.target.password.value,
-        passwordConfirm: event.target.password.value,
-        emailVisibility: true
-      };
+
+        const userData = {
+            username: event.target.name.value,
+            email: event.target.username.value,
+            password: event.target.password.value,
+        };
 
       dispatch(switchLoading());
       // Replace Promise.resolve with backend call using newUser
-      Promise.resolve(true).then((res) => {
+      signup(userData).then((res) => {
         dispatch(switchLoading());
       }).catch(err => {
         dispatch(switchLoading());
@@ -36,11 +36,13 @@ const Login = () => {
 
       setIsSigningUp(false);
     } else {
+        const userData = {
+            email: event.target.username.value,
+            password: event.target.password.value,
+          };
       try {
         dispatch(switchLoading());
-        // replace with backend call
-        Promise.resolve(true).then((res) => {
-            // handle login
+        signin(userData).then((res) => {
             dispatch(switchLoading());
             navigate("/SoundSync/home");
           }).catch(err => {
