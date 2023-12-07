@@ -1,0 +1,83 @@
+.container {
+    align-items: center;
+    justify-items: center;
+
+}
+
+.user-section{
+    width: 90%;
+    height: 240px;
+    margin-left: 140px;
+}
+
+.user-icon {
+    width: 200px;
+    margin-right: 0;
+}
+
+.user-icon > svg{
+    font-size: 120px;
+    margin-top: 40px;
+}
+
+.user-info {
+    margin-left: 10px;
+}
+
+.user-titles {
+    margin-left: -50px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.margin-left-40px {
+    margin-left: 40px;
+    text-decoration: none;
+    color: white;
+}
+
+.user-name {
+    font-size: 80px;
+    margin-right: 30px;
+}
+
+.liked-songs-section {
+    /* background-color: #055f3e; */
+}
+
+.followers-section {
+    /* background-color: #0e4f37; */
+    background: linear-gradient(to bottom right, #0e4f37, #05734b);
+}
+
+.following-section {
+    /* background-color: #055f3e; */
+    margin-bottom: 70px !important;
+}
+
+
+.borders-round {
+    border-radius: 30px;
+}
+
+.bubble {
+    border-radius: 30px;
+    height: 180px;
+    margin-left: 120px;
+    width: 1100px;
+    margin-bottom: 30px;
+}
+
+.bubble-color {
+    /* background-color: #055f3e; */
+    background: linear-gradient(to bottom right, #0e4f37, #05734b);
+}
+
+.bubble h3 {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.background {
+    background: linear-gradient(to bottom right, #0e4f37, #055f3e);
+}

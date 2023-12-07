@@ -12,7 +12,7 @@ function App() {
       <HashRouter>
         <div>
           <Routes>
-            <Route path="/" element={<Navigate to="/SoundSync/login"/>} />
+            <Route path="/" element={<Navigate to="/SoundSync/home"/>} />
             <Route path="/SoundSync/*" element={<SoundSync/>} />
           </Routes>
         </div>

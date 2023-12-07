@@ -60,5 +60,52 @@
 }
 
 .search > svg {
-    font-size: 20px;
+    font-size: 40px;
 }
+
+.dropdown-search {
+    width: 80px;
+    border: none;
+}
+
+.chevron > svg {
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.search-bar {
+    width: 300px;
+}
+
+.custom-select {
+    position: relative;
+    width: 200px; /* Adjust as needed */
+    margin-right: -70px;
+    margin-top: 3px;
+  }
+  
+  .custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100px;
+    padding-right: 30px; /* To leave space for the icon */
+  }
+  
+  .select-icon {
+    position: absolute;
+    top: 0;
+    right: 100px;
+    pointer-events: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .select-icon i {
+    pointer-events: all;
+    cursor: pointer;
+  }
+  

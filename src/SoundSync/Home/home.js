@@ -32,11 +32,11 @@ function Home() {
     const shuffleSongs = () => {
         shuffledSongs = shuffleArray(shuffledSongs);
         console.log("shuffling...");
-        setSongs(shuffledSongs);
+        setSongs([...shuffledSongs]);
     }
     const findAllSongs = async () => {
         const response = await axios.get(URL);
-        console.log(await findPlaylistBySearch("workout music"))
+        // console.log(await findPlaylistBySearch("workout music"))
         setSongs(response.data);
     };
   
@@ -57,21 +57,18 @@ function Home() {
                 <div className="col center show-right-border">
                     <div className="explore-section-title">
                         <h4 className="white padding-top-10px">Explore New Songs!
-                            <IoMdRefresh /></h4>
+                            <IoMdRefresh onClick={shuffleSongs} /></h4>
                     </div>
                     {songs.slice(0, 6).map((link, index) => (
 
                         <li className="song-options form-control mint-green-bg">
-                            <div onClick={() => shuffleSongs()}
+                            <div
                                 className={""}>
                                 <h5>{link.name}</h5>
                                 <h6>By {link.artist}</h6>
                             </div>
 
                         </li>
-
-
-
                     ))}
                 </div>
             </div>
