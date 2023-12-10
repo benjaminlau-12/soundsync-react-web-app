@@ -6,6 +6,7 @@ import "./index.css"
 import TopBar from "./TopBar/topbar";
 import Profile from "./Profile/profile";
 import Search from "./Search/search";
+import Details from "./Details/details";
 
 function SoundSync() {
     return (
@@ -17,6 +18,7 @@ function SoundSync() {
                 <Route path="login" element={<Login />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="search" element={<Search />} />
+                <Route path="details" element={<Details />} />
             </Routes>
         </div>
 

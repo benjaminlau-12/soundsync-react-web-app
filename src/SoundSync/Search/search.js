@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { getApiToken, findPlaylistBySearch, searchSpotify } from './client';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function Search() {
@@ -9,6 +9,7 @@ function Search() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get('q');
+    const navigate = useNavigate();
 
     const [searchResults, setSearchResults] = useState({
         tracks: { items: [] },
@@ -22,6 +23,15 @@ function Search() {
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
+
+  const handleGoToDetails = (id, type) => {  
+    // make plural for api purpose later
+    if (type.charAt(type.length - 1) !== 's') {
+        type += 's';
+    }
+    navigate(`/SoundSync/details?identifier=${encodeURIComponent(id)}&mediaType=${encodeURIComponent(type)}`);
+  }
+
 
 
   useEffect(() => {
@@ -80,16 +90,14 @@ function Search() {
       <div className="row">
         {searchResults[activeTab].items.map((item) => (
             <div key={item.id} className="col-md-3 mb-4">
-            <div className="card">
+            <div className="card" onClick={() => handleGoToDetails(item.id, item.type)}>
                 <img src={item.images && item.images.length !== 0 ? item.images[0].url : item.album && item.album.images.length !== 0 ? item.album.images[0].url : ''} className="card-img-top" alt={item.name} />
                 <div className="card-body">
-                <h5 className="card-title">{item.name}</h5>
-                {/* Additional information based on the item type */}
-                {item.type === 'track' && <p className="card-text">Artist: {item.artists[0].name}</p>}
-                {item.type === 'album' && <p className="card-text">Release Date: {item.release_date}</p>}
-                {item.type === 'artist' && <p className="card-text">Followers: {item.followers.total}</p>}
-                {item.type === 'playlist' && <p className="card-text">Tracks: {item.tracks.total}</p>}
-                {/* Add more details based on your needs */}
+                    <h5 className="card-title">{item.name}</h5>
+                    {item.type === 'track' && <p className="card-text">Artist: {item.artists[0].name}</p>}
+                    {item.type === 'album' && <p className="card-text">Release Date: {item.release_date}</p>}
+                    {item.type === 'artist' && <p className="card-text">Followers: {item.followers.total}</p>}
+                    {item.type === 'playlist' && <p className="card-text">Tracks: {item.tracks.total}</p>}
                 </div>
             </div>
             </div>

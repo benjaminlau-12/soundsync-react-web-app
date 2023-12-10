@@ -16,7 +16,7 @@ export const getApiToken = async () => {
 
 }
 
-const getHeaders = async () => { 
+export const getHeaders = async () => { 
     return { "Authorization": `Bearer ${await getApiToken()}` }
 }
 
