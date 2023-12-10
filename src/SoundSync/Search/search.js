@@ -81,7 +81,7 @@ function Search() {
         {searchResults[activeTab].items.map((item) => (
             <div key={item.id} className="col-md-3 mb-4">
             <div className="card">
-                <img src={item.images ? item.images[0].url : item.album.images[0].url} className="card-img-top" alt={item.name} />
+                <img src={item.images && item.images.length !== 0 ? item.images[0].url : item.album && item.album.images.length !== 0 ? item.album.images[0].url : ''} className="card-img-top" alt={item.name} />
                 <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
                 {/* Additional information based on the item type */}
