@@ -16,39 +16,47 @@ export const getApiToken = async () => {
 
 }
 
+const getHeaders = async () => { 
+    return { "Authorization": `Bearer ${await getApiToken()}` }
+}
+
 
 export const findPlaylistByGenre = async (genre) => {
-    const headers = {
-        Authorization: `Bearer ${await getApiToken()}`
-      }
 
     const params = {
         "type": "playlist",
         "q": `genre:${genre}`
     }
 
-
-    const response = await axios.get(SPOTIFY_SEARCH_API, {headers: headers, params: params});
+    const response = await axios.get(SPOTIFY_SEARCH_API, {headers: await getHeaders(), params: params});
     return response;
 
 };
 
 export const findPlaylistBySearch = async (query) => {
-    const headers = { 
-        "Authorization": `Bearer ${await getApiToken()}`
-    }
-
-
     const params = {
         "type": "playlist",
         "q": query
     }
 
-
-    const response = await axios.get(SPOTIFY_SEARCH_API, {headers: headers, params: params});
+    const response = await axios.get(SPOTIFY_SEARCH_API, {headers: await getHeaders(), params: params});
     return response;
 
 };
+
+export const searchSpotify = async (query) => {
+    const params = {
+        "type": "track,album,artist,playlist",
+        "q": query
+    }
+    
+    const response = await axios.get(SPOTIFY_SEARCH_API, {headers: await getHeaders(), params: params});
+    if (response.status != 200) {
+        console.error(response); 
+        throw new Error("Spotify API returned an error", response.statusText)
+    }
+    return response.data;
+}
 
 
 

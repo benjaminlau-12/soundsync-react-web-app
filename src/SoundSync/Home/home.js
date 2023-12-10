@@ -3,7 +3,6 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoMdRefresh } from "react-icons/io";
-import { findPlaylistByGenre, findPlaylistBySearch, getApiToken } from "../Search/client";
 
 function Home() {
     var picture = null;
@@ -36,7 +35,6 @@ function Home() {
     }
     const findAllSongs = async () => {
         const response = await axios.get(URL);
-        // console.log(await findPlaylistBySearch("workout music"))
         setSongs(response.data);
     };
   

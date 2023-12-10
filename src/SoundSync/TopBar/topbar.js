@@ -3,8 +3,6 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaHouse, FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
-import { IoChevronDownSharp } from "react-icons/io5";
-import { useDispatch } from "react-redux";
 
 function TopBar() {
     const navigate = useNavigate();
@@ -12,9 +10,15 @@ function TopBar() {
     const [user, setUser] = useState("Login");
     const loggedIn = true;
     const handleClick = (link) => {
-        console.log("handling Click")
         navigate(`/SoundSync/${link}`)
     };
+
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+    
+        const searchValue = event.target.elements.searchInput.value;
+        navigate(`/SoundSync/search?q=${encodeURIComponent(searchValue)}`);
+      };
     
     return (
         <div className="topbar row">
@@ -23,21 +27,15 @@ function TopBar() {
                     onClick={() => handleClick("Home")}><FaHouse /></a>
             </div>
             <div className="col d-flex search">
-                <div class="custom-select">
-                    <select onChange={(e) => setSearchType(e.target.value)}
-                        className="form-control dropdown-search" id="dropdown">
-                        <option>Song</option>
-                        <option>Album</option>
-                        <option>Artist</option>
-                        <option>Playlist</option>
-                    </select>
-                    <div class="select-icon">
-                        <IoChevronDownSharp />
-                    </div>
-                </div>
-                <input className="text form-control search-bar" placeholder="Search artists, songs, or friends"></input>
-                <BsSearch />
-
+                <form id="search-bar" className="search-bar" onSubmit={handleSubmit}>
+                    <input
+                    name="searchInput"
+                    className="form-control text"
+                    type="text"
+                    placeholder="Search artists, songs, or friends"
+                    />
+                </form>
+                <div className="btn text-white" form="search-bar" type="submit"><BsSearch /></div>
             </div>
             <div className="text-end col login">
                 {loggedIn && (
