@@ -37,7 +37,7 @@ function Home() {
         const response = await axios.get(URL);
         setSongs(response.data);
     };
-  
+
     useEffect(() => {
         findAllSongs();
     }, []);
@@ -51,6 +51,14 @@ function Home() {
             <div className="row black-bg main-content show-bot-border">
                 <div className="col center show-right-border show-left-border border-radius-120px">
                     <h4 className="white padding-top-10px">Explore What Other Users Like!</h4>
+                    <li className="explore-options form-control mint-green-bg">
+                        <div
+                            className={""}>
+                            <h5>Sad by XXXTentacion</h5>
+                            <h6>Liked by user123</h6>
+                        </div>
+
+                    </li>
                 </div>
                 <div className="col center show-right-border">
                     <div className="explore-section-title">

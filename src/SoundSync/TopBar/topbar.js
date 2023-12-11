@@ -7,7 +7,7 @@ import { BsSearch } from "react-icons/bs";
 function TopBar() {
     const navigate = useNavigate();
     const [searchType, setSearchType] = useState("Song");
-    const [user, setUser] = useState("Login");
+    const [user, setUser] = useState("Log In");
     const loggedIn = true;
     const handleClick = (link) => {
         navigate(`/SoundSync/${link}`)

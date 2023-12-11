@@ -65,6 +65,25 @@
     /* Change border color when hovered */
 }
 
+.explore-options {
+    margin-left: -3px;
+    border-radius: 90px !important;
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid transparent !important;
+    /* Set initial border to transparent */
+    transition: border 0.3s;
+    /* Adding a transition for smooth effect */
+    align-content: left;
+    width: 700px !important;
+}
+
+.explore-options:hover {
+    border-color: #3EB489 !important;
+    background-color: rgb(85, 83, 83) !important;
+    /* Change border color when hovered */
+}
+
 .explore-section-title h4 > svg {
     margin-left: 10px;
 }

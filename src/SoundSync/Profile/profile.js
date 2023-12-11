@@ -5,13 +5,21 @@ import axios from "axios";
 
 function Profile() {
     const URL = "http://localhost:4000";
-    var {currentUser} = useSelector((state) => state.loginUser);
+    var { currentUser } = useSelector((state) => state.loginUser);
+    const likedArtists = ["Eminem", "Mac Miller", "Rihanna", "Bad Bunny", "Drake", "Danny Ocean", "Kanye West"];
+    const followers = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
+    const following = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
     const getLikedArtists = () => {
         currentUser = axios.get(`${URL}/api/users/username/CaptainMarvel23`);
         console.log("PRINTING!!")
         console.log(currentUser);
     }
-
+    function getArtistInitials(artistName) {
+        return artistName
+            .split(' ')
+            .map(word => word.charAt(0))
+            .join('');
+    }
     const testing = () => {
         console.log("Testing!!")
         console.log(currentUser);
@@ -35,13 +43,54 @@ function Profile() {
             </div>
             <div>
                 <div className="bubble bubble-color row">
-                    <h3 className="white">Liked Artists</h3>
+                    <div className="d-flex">
+                        <h3 className="white">Liked Artists</h3>
+                        <h6 className="showall"><a onClick={testing}>Show All</a></h6>
+                    </div>
+
+                    {likedArtists.slice(0, 7).map((name, index) => (
+                        <div onClick={testing} className="col text-center ">
+                            <div class="user-bubble mx-auto">
+                                {getArtistInitials(name)}
+                            </div>
+                            <div class="user-label mt-2">
+                                <p>{name}</p>
+                            </div>
+                        </div>
+                    ))}
+
                 </div>
                 <div className="bubble followers-section row ">
-                    <h3 className="white">Followers</h3>
+                <div className="d-flex">
+                        <h3 className="white">Followers</h3>
+                        <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
+                    </div>
+                    {followers.slice(0, 7).map((name, index) => (
+                        <div onClick={testing} className="col text-center ">
+                            <div class="user-bubble mx-auto">
+                                {getArtistInitials(name)}
+                            </div>
+                            <div class="user-label mt-2">
+                                <p>{name}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <div className="following-section bubble bubble-color row">
-                    <h3 className="white">Following</h3>
+                <div className="d-flex">
+                        <h3 className="white">Following</h3>
+                        <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
+                    </div>
+                    {following.slice(0, 7).map((name, index) => (
+                        <div onClick={testing} className="col text-center ">
+                            <div class="user-bubble mx-auto">
+                                {getArtistInitials(name)}
+                            </div>
+                            <div class="user-label mt-2">
+                                <p>{name}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 
