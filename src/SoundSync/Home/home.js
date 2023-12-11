@@ -55,7 +55,7 @@ function Home() {
 
 
     return (
-        <div className="col-md-12 col-sm-6">
+        <div className="col-md-12 col-sm-6 bt-container">
             <div className="center row">
                 <h1 className="mint-green-bg no-bot-margin">Welcome to SoundSync</h1>
             </div>

@@ -13,7 +13,7 @@ function Profile() {
     const followers = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
     const following = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
     const getLikedArtists = () => {
-        currentUser = axios.get(`${URL}/api/users/username/CaptainMarvel23`);
+        currentUser = axios.get(`${URL}/api/users/username/user123`);
         console.log("PRINTING!!")
         console.log(currentUser);
     }
@@ -27,13 +27,13 @@ function Profile() {
         console.log("Testing!!")
         console.log(currentUser);
     }
-    const goToUserProfile = (userid) => {
-        // setUserTo(userid);
-        console.log(userid);
-        navigate(`/SoundSync/Profile/${userid}`)
+    const goToUserProfile = (name) => {
+        setUserTo(name);
+        console.log(name);
+        navigate(`/SoundSync/Profile/${name}`)
     }
     useEffect(() => {
-        testing();
+        // testing();
         getLikedArtists();
     }, []);
     return (
@@ -57,7 +57,7 @@ function Profile() {
                     </div>
 
                     {likedArtists.slice(0, 7).map((name, index) => (
-                        <div onClick={testing} className="col text-center ">
+                        <div onClick={() => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
                                 {getArtistInitials(name)}
                             </div>
@@ -74,7 +74,7 @@ function Profile() {
                         <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
                     </div>
                     {followers.slice(0, 7).map((name, index) => (
-                        <div onClick={testing} className="col text-center ">
+                        <div onClick={() => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
                                 {getArtistInitials(name)}
                             </div>
@@ -90,7 +90,7 @@ function Profile() {
                         <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
                     </div>
                     {following.slice(0, 7).map((name, index) => (
-                        <div onClick={(name) => goToUserProfile(name)} className="col text-center ">
+                        <div onClick={() => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
                                 {getArtistInitials(name)}
                             </div>
