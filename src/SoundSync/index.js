@@ -17,6 +17,7 @@ function SoundSync() {
                 <Route path="home" element={<Home />} />
                 <Route path="login" element={<Login />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="profile/:userid" element={<Profile />} />
                 <Route path="search" element={<Search />} />
                 <Route path="details" element={<Details />} />
             </Routes>

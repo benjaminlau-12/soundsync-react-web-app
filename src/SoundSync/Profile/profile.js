@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css"
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Profile() {
     const URL = "http://localhost:4000";
     var { currentUser } = useSelector((state) => state.loginUser);
+    const [userTo, setUserTo] = useState("Benjamin Lau")
+    const navigate = useNavigate();
     const likedArtists = ["Eminem", "Mac Miller", "Rihanna", "Bad Bunny", "Drake", "Danny Ocean", "Kanye West"];
     const followers = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
     const following = ["Jake Writer", "Benjamin Lau", "Zoe Langelaan", "John Smith", "Lionel Messi", "Cristiano Ronaldo", "Elon Musk"];
@@ -24,6 +27,11 @@ function Profile() {
         console.log("Testing!!")
         console.log(currentUser);
     }
+    const goToUserProfile = (userid) => {
+        // setUserTo(userid);
+        console.log(userid);
+        navigate(`/SoundSync/Profile/${userid}`)
+    }
     useEffect(() => {
         testing();
         getLikedArtists();
@@ -33,7 +41,7 @@ function Profile() {
             <div className="user-section row">
                 <div className="col user-info">
                     <div className="user-titles">
-                        <h1 className="user-name">Benjamin Lau</h1>
+                        <h1 className="user-name">{userTo}</h1>
                         <div className="d-flex">
                             <a className="white text-decoration-none"> 100 Followers</a>
                             <a onClick={testing} className="margin-left-40px"> 1 Following</a>
@@ -82,7 +90,7 @@ function Profile() {
                         <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
                     </div>
                     {following.slice(0, 7).map((name, index) => (
-                        <div onClick={testing} className="col text-center ">
+                        <div onClick={(name) => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
                                 {getArtistInitials(name)}
                             </div>
