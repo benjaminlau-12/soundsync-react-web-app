@@ -3,13 +3,13 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaHouse, FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
-import { getUser } from "../Login/client";
+import { getUser, signout} from "../Login/client";
+import { SlLogout } from "react-icons/sl";
 
 function TopBar() {
     const navigate = useNavigate();
     const [searchType, setSearchType] = useState("Song");
-    const [user, setUser] = useState(null);
-    const loggedIn = true;
+    const [user, setUser] = useState({"username": "Log In"});
     const handleClick = (link) => {
         navigate(`/SoundSync/${link}`)
     };
@@ -17,12 +17,11 @@ function TopBar() {
     const fetchUser = async () => {
         const account = await getUser();
         setUser(account);
-        console.log(account)
      };
 
      useEffect(() => {
         fetchUser();
-    }, []);
+    });
 
 
     const handleSubmit = (event) => {
@@ -50,16 +49,22 @@ function TopBar() {
                 <div className="btn text-white" form="search-bar" type="submit"><BsSearch /></div>
             </div>
             <div className="text-end col login">
-                {loggedIn && (
+                {user._id && (
                     <div>
+                        <a className="text-decoration-none mx-3"
+                            onClick={async () => {
+                                await signout();
+                                setUser({"username": "Log In"});
+                                handleClick("Login")}
+                                }><SlLogout /></a>
                         <a className="text-decoration-none"
-                            onClick={() => handleClick("Profile")}><FaUser />{user}</a>
+                            onClick={() => handleClick("Profile")}><FaUser />{user.username}</a>
                     </div>
                 )}
-                {!loggedIn && (
+                {!user._id && (
                     <div>
                         <a className="text-decoration-none"
-                            onClick={() => handleClick("Login")}><FaUser />{user}</a>
+                            onClick={() => handleClick("Login")}><FaUser />Log In</a>
                     </div>
                 )}
 
