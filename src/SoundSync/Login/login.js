@@ -25,7 +25,6 @@ const Login = () => {
         };
 
       dispatch(switchLoading());
-      // Replace Promise.resolve with backend call using newUser
       signup(userData).then((res) => {
         dispatch(switchLoading());
       }).catch(err => {

@@ -3,15 +3,27 @@ import { React, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaHouse, FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
+import { getUser } from "../Login/client";
 
 function TopBar() {
     const navigate = useNavigate();
     const [searchType, setSearchType] = useState("Song");
-    const [user, setUser] = useState("Log In");
+    const [user, setUser] = useState(null);
     const loggedIn = true;
     const handleClick = (link) => {
         navigate(`/SoundSync/${link}`)
     };
+
+    const fetchUser = async () => {
+        const account = await getUser();
+        setUser(account);
+        console.log(account)
+     };
+
+     useEffect(() => {
+        fetchUser();
+    }, []);
+
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the default form submission behavior

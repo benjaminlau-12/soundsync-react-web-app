@@ -3,6 +3,7 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoMdRefresh } from "react-icons/io";
+import { getUser } from "../Login/client";
 
 function Home() {
     var picture = null;
@@ -10,6 +11,15 @@ function Home() {
     const genres = ["Pop", "Country", "Latin", "Hip-Hop", "Rap", "Rock", "Dance", "R&B",
         "Electronic", "Indie", "Salsa", "Merengue", "Testing"];
     const [songs, setSongs] = useState([]);
+
+    const [user, setUser] = useState(null);
+
+    const fetchUser = async () => {
+        const account = await getUser();
+        setUser(account);
+     };
+
+
     const navigate = useNavigate();
     const handleClick = (link) => {
         console.log("handling Click")
@@ -40,6 +50,7 @@ function Home() {
 
     useEffect(() => {
         findAllSongs();
+        fetchUser();
     }, []);
 
 
