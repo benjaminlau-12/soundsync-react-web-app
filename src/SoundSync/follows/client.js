@@ -1,7 +1,5 @@
 import axios from "axios";
-const request = axios.create({
-  withCredentials: true,
-});
+import { request } from "../clientUtils";
 
 const FOLLOWS_API = "http://localhost:4000/api";
 

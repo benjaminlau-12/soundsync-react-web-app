@@ -3,6 +3,7 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoMdRefresh } from "react-icons/io";
+import { getUser } from "../Login/client";
 
 function Home() {
     var picture = null;
@@ -10,6 +11,17 @@ function Home() {
     const genres = ["Pop", "Country", "Latin", "Hip-Hop", "Rap", "Rock", "Dance", "R&B",
         "Electronic", "Indie", "Salsa", "Merengue", "Testing"];
     const [songs, setSongs] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+    const fetchUser = async () => {
+        const account = await getUser();
+        if(account) {
+            setUser(account);
+            setIsLoggedIn(true);
+        }   
+     };
+
+
     const navigate = useNavigate();
     const handleClick = (link) => {
         console.log("handling Click")
@@ -37,24 +49,36 @@ function Home() {
         const response = await axios.get(URL);
         setSongs(response.data);
     };
-  
+
     useEffect(() => {
         findAllSongs();
+        fetchUser();
     }, []);
 
 
     return (
-        <div className="col">
+        <div className="col-md-12 col-sm-6 bt-container">
             <div className="center row">
                 <h1 className="mint-green-bg no-bot-margin">Welcome to SoundSync</h1>
             </div>
             <div className="row black-bg main-content show-bot-border">
-                <div className="col center show-right-border show-left-border border-radius-120px">
-                    <h4 className="white padding-top-10px">Explore What Other Users Like!</h4>
+                {isLoggedIn && (
+                    <div className="col center show-right-border show-left-border border-radius-120px">
+                    <h4 className="white padding-top-10px">Explore What Your Followers Like!</h4>
+                    <li className="explore-options form-control mint-green-bg">
+                        <div
+                            className={""}>
+                            <h5>Sad by XXXTentacion</h5>
+                            <h6>Liked by user123</h6>
+                        </div>
+
+                    </li>
                 </div>
+                )}
+                
                 <div className="col center show-right-border">
                     <div className="explore-section-title">
-                        <h4 className="white padding-top-10px">Explore New Songs!
+                        <h4 className="white padding-top-10px">Try Searching These Songs!
                             <IoMdRefresh onClick={shuffleSongs} /></h4>
                     </div>
                     {songs.slice(0, 6).map((link, index) => (

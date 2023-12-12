@@ -41,10 +41,6 @@
     margin-right: 30px;
 }
 
-.liked-songs-section {
-    /* background-color: #055f3e; */
-}
-
 .followers-section {
     /* background-color: #0e4f37; */
     background: linear-gradient(to bottom right, #0e4f37, #05734b);
@@ -81,3 +77,38 @@
 .background {
     background: linear-gradient(to bottom right, #0e4f37, #055f3e);
 }
+
+.user-bubble {
+    background-color: #088144; /* Change color here */
+    color: #fff;
+    padding: 20px;
+    border-radius: 50%;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  .user-label {
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+  }
+
+  .user-bubble:hover {
+    background-color: #0b9159; /* Change color on hover */
+    cursor: pointer; /* Change cursor on hover */
+  }
+
+  .showall {
+    color:white;
+    margin-left: 810px;
+    margin-top: 10px;
+  }
+
+  .show-all-follow {
+    color:white;
+    margin-left: 850px;
+    margin-top: 10px;
+  }
