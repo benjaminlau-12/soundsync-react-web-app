@@ -15,12 +15,16 @@ function TopBar() {
     };
     const fetchUser = async () => {
         const account = await getUser();
-        setUser(account);
+        if (account == null) {
+            alert("Incorrect username or password");
+        } else {
+            setUser(account);
+        }
     };
 
     useEffect(() => {
         fetchUser();
-    });
+    }, []);
 
 
     const handleSubmit = (event) => {
@@ -54,7 +58,7 @@ function TopBar() {
                 <div className="btn text-white" form="search-bar" type="submit" onClick={handleSearchClick}><BsSearch /></div>
             </div>
             <div className="text-end col login">
-                {user._id && (
+                {(user && user._id) && (
                     <div>
                         <a className="text-decoration-none mx-3"
                             onClick={async () => {

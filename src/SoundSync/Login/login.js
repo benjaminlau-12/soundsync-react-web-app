@@ -42,8 +42,14 @@ const Login = () => {
       try {
         dispatch(switchLoading());
         signin(userData).then((res) => {
-            dispatch(switchLoading());
-            navigate("/SoundSync/home");
+          console.log(res);
+            if (res && res._id !== undefined) {
+              dispatch(switchLoading());
+              navigate("/SoundSync/home");
+            } else {
+              dispatch(switchLoading());
+              alert("Invalid Credentials, try again")
+            }
           }).catch(err => {
             dispatch(switchLoading());
             alert("Invalid Credentials, try again")
