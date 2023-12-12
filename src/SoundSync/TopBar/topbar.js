@@ -1,6 +1,6 @@
 import "./topbar.css";
 import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { FaHouse, FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
 import { getUser, signout } from "../Login/client";
@@ -13,18 +13,18 @@ function TopBar() {
     const handleClick = (link) => {
         navigate(`/SoundSync/${link}`)
     };
+
+    const location = useLocation();
+
+    console.log(user);
     const fetchUser = async () => {
         const account = await getUser();
-        if (account == null) {
-            alert("Incorrect username or password");
-        } else {
-            setUser(account);
-        }
+        setUser(account);
     };
 
     useEffect(() => {
         fetchUser();
-    }, []);
+    }, [location]);
 
 
     const handleSubmit = (event) => {
@@ -58,7 +58,7 @@ function TopBar() {
                 <div className="btn text-white" form="search-bar" type="submit" onClick={handleSearchClick}><BsSearch /></div>
             </div>
             <div className="text-end col login">
-                {(user && user._id) && (
+                {user._id && (
                     <div>
                         <a className="text-decoration-none mx-3"
                             onClick={async () => {

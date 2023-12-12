@@ -14,6 +14,7 @@ function Home() {
     const [songs, setSongs] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    
     const fetchUser = async () => {
         const account = await getUser();
         if(account) {
