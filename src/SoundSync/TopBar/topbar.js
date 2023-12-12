@@ -1,6 +1,6 @@
 import "./topbar.css";
 import { React, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { FaHouse, FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
 import { getUser, signout } from "../Login/client";
@@ -13,6 +13,10 @@ function TopBar() {
     const handleClick = (link) => {
         navigate(`/SoundSync/${link}`)
     };
+
+    const location = useLocation();
+
+    console.log(user);
     const fetchUser = async () => {
         const account = await getUser();
         setUser(account);
@@ -20,7 +24,7 @@ function TopBar() {
 
     useEffect(() => {
         fetchUser();
-    });
+    }, [location]);
 
 
     const handleSubmit = (event) => {

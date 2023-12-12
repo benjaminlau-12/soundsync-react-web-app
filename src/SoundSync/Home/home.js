@@ -4,6 +4,7 @@ import { React, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoMdRefresh } from "react-icons/io";
 import { getUser } from "../Login/client";
+import { searchByGenre } from "../Search/client";
 
 function Home() {
     var picture = null;
@@ -13,6 +14,7 @@ function Home() {
     const [songs, setSongs] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    
     const fetchUser = async () => {
         const account = await getUser();
         if(account) {
@@ -23,14 +25,12 @@ function Home() {
 
 
     const navigate = useNavigate();
-    const handleClick = (link) => {
-        console.log("handling Click")
-        navigate(`/SoundSync/${link}`)
+
+    const handleGenreNav = (genre) => {
+        genre = genre.toLowerCase();
+        navigate(`/SoundSync/search?q=${encodeURIComponent(`genre:${genre}`)}`);
     };
-    const navigateToGenre = (genre) => {
-        navigate(`/SoundSync/${genre.link}`)
-        console.log(genre.link);
-    }
+
     // Function to shuffle an array randomly. It is used to display random songs to the user.
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -101,20 +101,20 @@ function Home() {
 
 
                 <div className="row">
-                    {genres.slice(0, 6).map((link, index) => (
+                    {genres.slice(0, 6).map((genre, index) => (
                         <div className="col left-margin-10px">
-                            <a className="text-decoration-none white" onClick={() => navigateToGenre({ link })}>
-                                <h3>{link}</h3>
+                            <a className="text-decoration-none white" onClick={() => handleGenreNav(genre)}>
+                                <h3>{genre}</h3>
                             </a>
                         </div>
 
                     ))}
                 </div>
                 <div className="row">
-                    {genres.slice(6, 12).map((link, index) => (
+                    {genres.slice(6, 12).map((genre, index) => (
                         <div className="col left-margin-80px">
-                            <a className="text-decoration-none white" onClick={() => navigateToGenre({ link })}>
-                                <h3>{link}</h3>
+                            <a className="text-decoration-none white" onClick={() => handleGenreNav(genre)}>
+                                <h3>{genre}</h3>
                             </a>
                         </div>
 

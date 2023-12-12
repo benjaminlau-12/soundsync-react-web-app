@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { getApiToken, findPlaylistBySearch, searchSpotify } from './client';
 import { useLocation, useNavigate } from 'react-router-dom';
+import "./search.css";
 
 
 function Search() {
@@ -55,7 +56,7 @@ function Search() {
       <ul className="nav nav-tabs">
         <li className="nav-item">
           <button
-            className={`nav-link ${activeTab === 'tracks' ? 'active' : ''}`}
+            className={`text-dark nav-link ${activeTab === 'tracks' ? 'active' : ''}`}
             onClick={() => handleTabChange('tracks')}
           >
             Tracks
@@ -63,7 +64,7 @@ function Search() {
         </li>
         <li className="nav-item">
           <button
-            className={`nav-link ${activeTab === 'albums' ? 'active' : ''}`}
+            className={`text-dark nav-link ${activeTab === 'albums' ? 'active' : ''}`}
             onClick={() => handleTabChange('albums')}
           >
             Albums
@@ -71,7 +72,7 @@ function Search() {
         </li>
         <li className="nav-item">
           <button
-            className={`nav-link ${activeTab === 'artists' ? 'active' : ''}`}
+            className={`text-dark nav-link ${activeTab === 'artists' ? 'active' : ''}`}
             onClick={() => handleTabChange('artists')}
           >
             Artists
@@ -79,7 +80,7 @@ function Search() {
         </li>
         <li className="nav-item">
           <button
-            className={`nav-link ${activeTab === 'playlists' ? 'active' : ''}`}
+            className={`text-dark nav-link ${activeTab === 'playlists' ? 'active' : ''}`}
             onClick={() => handleTabChange('playlists')}
           >
             Playlists
