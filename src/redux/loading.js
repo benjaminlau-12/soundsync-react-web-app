@@ -8,6 +8,7 @@ export const loadingSlice = createSlice({
   initialState,
   reducers: {
     switchLoading: (loadingState) => {
+        console.log(loadingState.isLoading);
         loadingState.isLoading = !loadingState.isLoading;
      }
   },
