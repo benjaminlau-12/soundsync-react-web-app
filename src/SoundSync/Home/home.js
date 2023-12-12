@@ -11,12 +11,14 @@ function Home() {
     const genres = ["Pop", "Country", "Latin", "Hip-Hop", "Rap", "Rock", "Dance", "R&B",
         "Electronic", "Indie", "Salsa", "Merengue", "Testing"];
     const [songs, setSongs] = useState([]);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-
     const fetchUser = async () => {
         const account = await getUser();
-        setUser(account);
+        if(account) {
+            setUser(account);
+            setIsLoggedIn(true);
+        }   
      };
 
 
@@ -60,8 +62,9 @@ function Home() {
                 <h1 className="mint-green-bg no-bot-margin">Welcome to SoundSync</h1>
             </div>
             <div className="row black-bg main-content show-bot-border">
-                <div className="col center show-right-border show-left-border border-radius-120px">
-                    <h4 className="white padding-top-10px">Explore What Other Users Like!</h4>
+                {isLoggedIn && (
+                    <div className="col center show-right-border show-left-border border-radius-120px">
+                    <h4 className="white padding-top-10px">Explore What Your Followers Like!</h4>
                     <li className="explore-options form-control mint-green-bg">
                         <div
                             className={""}>
@@ -71,9 +74,11 @@ function Home() {
 
                     </li>
                 </div>
+                )}
+                
                 <div className="col center show-right-border">
                     <div className="explore-section-title">
-                        <h4 className="white padding-top-10px">Explore New Songs!
+                        <h4 className="white padding-top-10px">Try Searching These Songs!
                             <IoMdRefresh onClick={shuffleSongs} /></h4>
                     </div>
                     {songs.slice(0, 6).map((link, index) => (
