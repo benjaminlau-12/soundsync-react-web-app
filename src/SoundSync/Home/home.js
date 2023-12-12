@@ -26,6 +26,7 @@ function Home() {
     const navigate = useNavigate();
 
     const handleGenreNav = (genre) => {
+        genre = genre.toLowerCase();
         navigate(`/SoundSync/search?q=${encodeURIComponent(`genre:${genre}`)}`);
     };
 

@@ -1,0 +1,8 @@
+.nav-link.active {
+    color: green!important;
+}
+
+.nav-tabs {
+    --bs-nav-tabs-border-width: 0!important;
+}
+
