@@ -14,14 +14,14 @@ function Home() {
     const [songs, setSongs] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    
+
     const fetchUser = async () => {
         const account = await getUser();
-        if(account) {
+        if (account) {
             setUser(account);
             setIsLoggedIn(true);
-        }   
-     };
+        }
+    };
 
 
     const navigate = useNavigate();
@@ -64,18 +64,31 @@ function Home() {
             <div className="row black-bg main-content show-bot-border">
                 {isLoggedIn && (
                     <div className="col center show-right-border show-left-border border-radius-120px">
-                    <h4 className="white padding-top-10px">Explore What Your Followers Like!</h4>
-                    <li className="explore-options form-control mint-green-bg">
-                        <div
-                            className={""}>
-                            <h5>Sad by XXXTentacion</h5>
-                            <h6>Liked by user123</h6>
-                        </div>
+                        <h4 className="white padding-top-10px">Explore What Your Followers Like!</h4>
+                        <li className="explore-options form-control mint-green-bg">
+                            <div>
+                                <h5>Sad by XXXTentacion</h5>
+                                <h6>Liked by user123</h6>
+                            </div>
 
-                    </li>
-                </div>
+
+
+                        </li>
+                        <li className="explore-options form-control mint-green-bg">
+                            <div>
+                                <h5>Rising Sun by JLo</h5>
+                                <h6>Liked by Jake Writer</h6>
+                            </div>
+                        </li>
+                        <li className="explore-options form-control mint-green-bg">
+                            <div>
+                                <h5>Passion Fruit by Drake</h5>
+                                <h6>Liked by Zoe Langelaan</h6>
+                            </div>
+                        </li>
+                    </div>
                 )}
-                
+
                 <div className="col center show-right-border">
                     <div className="explore-section-title">
                         <h4 className="white padding-top-10px">Try Searching These Songs!

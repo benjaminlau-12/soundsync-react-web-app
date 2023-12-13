@@ -7,7 +7,7 @@ import TopBar from "./TopBar/topbar";
 import Profile from "./Profile/profile";
 import Search from "./Search/search";
 import Details from "./Details/details";
-import { getUser } from "./Login/client";
+import Edit from "./Profile/edit/edit";
 
 function SoundSync() {
     return (
@@ -21,6 +21,7 @@ function SoundSync() {
                 <Route path="profile/:userid" element={<Profile />} />
                 <Route path="search" element={<Search />} />
                 <Route path="details" element={<Details />} />
+                <Route path="editprofile" element={<Edit />} />
             </Routes>
         </div>
 

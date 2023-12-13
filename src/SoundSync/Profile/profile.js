@@ -40,32 +40,25 @@ function Profile() {
         } else {
             account = await findUserByUsername(userid);
         }
-        setUsername(account.username);
-        setNumFollowers(account.numFollowers);
-        setNumFollowing(account.numFollowing);
-        setLikedArtists(account.likedArtists);
-        console.log(account.followers);
-        setFollowers(account.followers);
+        try {
+            setUsername(account.username);
+            setNumFollowers(account.followers.length);
+            setNumFollowing(account.following.length);
+            setLikedArtists(account.likedArtists);
+            console.log(account.followers);
+            setFollowers(account.followers);
+            setFollowing(account.following);
+        } catch {
+            console.log("Error in fetchUser!")
+        }
+        
 
         console.log(account);
 
     }
-    // const getLikedArtists = async () => {
-    //     if (!userid) {
-    //         const account = await getUser();
-    //         if (account) {
-    //             setLikedArtists(account.likedArtists);
-    //             console.log(account.likedArtists);
-    //         }
-    //     } else {
-    //         const account = await findUserByUsername(userid);
-    //         if (account) {
-    //             setLikedArtists(account.likedArtists);
-    //         }
-    //         console.log(account.likedArtists);
-    //     }
-
-    // }
+    const navigateToProfileEdit = () => {
+        navigate(`/SoundSync/EditProfile`)
+    }
     const getFollowers = async () => {
         const account = await getUser();
         if (account) {
@@ -97,7 +90,7 @@ function Profile() {
                             <a className="white text-decoration-none"> {numFollowers} Followers</a>
                             <a onClick={testing} className="margin-left-40px"> {numFollowing} Following</a>
                             {(!userid) && (
-                                <a>Profile Settings</a>
+                                <a onClick={navigateToProfileEdit} className="margin-left-300px"><h4>Change Profile Settings</h4></a>
                             )}
 
                         </div>
@@ -128,13 +121,13 @@ function Profile() {
                         <h3 className="white">Followers</h3>
                         <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
                     </div>
-                    {followers.slice(0, 7).map((id, index) => (
-                        <div onClick={() => goToUserProfile(id)} className="col text-center ">
+                    {followers.slice(0, 7).map((name, index) => (
+                        <div onClick={() => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
-                                {id}
+                                {getArtistInitials(name)}
                             </div>
                             <div class="user-label mt-2">
-                                {/* <p>{getUsernameByID(id)}</p> */}
+                                <p>{name}</p>
                             </div>
                         </div>
                     ))}
@@ -147,7 +140,7 @@ function Profile() {
                     {following.slice(0, 7).map((name, index) => (
                         <div onClick={() => goToUserProfile(name)} className="col text-center ">
                             <div class="user-bubble mx-auto">
-                                {/* {getArtistInitials(name)} */}
+                                {getArtistInitials(name)}
                             </div>
                             <div class="user-label mt-2">
                                 <p>{name}</p>
