@@ -45,7 +45,7 @@ function Profile() {
         setNumFollowing(account.numFollowing);
         setLikedArtists(account.likedArtists);
         console.log(account.followers);
-        // setFollowers(account.followers);
+        setFollowers(account.followers);
 
         console.log(account);
 
@@ -129,12 +129,12 @@ function Profile() {
                         <h6 className="show-all-follow"><a onClick={testing}>Show All</a></h6>
                     </div>
                     {followers.slice(0, 7).map((id, index) => (
-                        <div onClick={() => goToUserProfile(getUsernameByID(id))} className="col text-center ">
+                        <div onClick={() => goToUserProfile(id)} className="col text-center ">
                             <div class="user-bubble mx-auto">
-                                {getUsernameByID(id)}
+                                {id}
                             </div>
                             <div class="user-label mt-2">
-                                <p>{getUsernameByID(id)}</p>
+                                {/* <p>{getUsernameByID(id)}</p> */}
                             </div>
                         </div>
                     ))}
