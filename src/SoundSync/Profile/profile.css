@@ -119,3 +119,18 @@
     margin-left: 850px;
     margin-top: 10px;
   }
+
+  .follow-btn {
+    background-color:  #088144;
+    border-radius: 90px;
+    height:40px;
+    color: white;
+    margin-top: 30px;
+    /* color: red; */
+  }
+
+  .follow-btn:hover {
+    cursor: pointer;
+    background-color: rgb(8, 72, 57) !important;
+    color: white;
+  }

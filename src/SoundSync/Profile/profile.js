@@ -1,57 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./profile.css"
-import { useSelector } from "react-redux";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router";
-import { getUser, findUserById, findUserByUsername } from "../Login/client";
+import { getUser, findUserByUsername } from "../Login/client";
 
 function Profile() {
     const URL = "http://localhost:4000";
-    let { userid } = useParams();
+    let { userid } = useParams(); // Actually contains username, not userid
     const [username, setUsername] = useState("Anonymous")
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const [likedArtists, setLikedArtists] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [numFollowers, setNumFollowers] = useState(0);
     const [numFollowing, setNumFollowing] = useState(0);
-    const [isProfileOwner, setIsProfileOwner] = useState(false);
-    const [currentProfileID, setCurrentProfileID] = useState([]);
-
+    const [isFollowing, setIsFollowing] = useState(false);
     function getArtistInitials(artistName) {
         return artistName
             .split(' ')
             .map(word => word.charAt(0))
             .join('');
     }
-    async function getUsernameByID(_id) {
-        // const user = await findUserById(_id);
-        // return user.username;
-    }
+    
     const testing = () => {
         console.log("Testing!!")
     }
-    var isLoggedIn = false;
     const fetchUser = async () => {
         var account = null;
         if (!userid) {
             account = await getUser();
+            setUser(account);
         } else {
             account = await findUserByUsername(userid);
         }
         try {
+            if (user.following.includes(account.username)) {
+                setIsFollowing(true);
+            } else {
+                setIsFollowing(false);
+            }
             setUsername(account.username);
             setNumFollowers(account.followers.length);
             setNumFollowing(account.following.length);
             setLikedArtists(account.likedArtists);
-            console.log(account.followers);
             setFollowers(account.followers);
             setFollowing(account.following);
         } catch {
             console.log("Error in fetchUser!")
         }
-        
+
 
         console.log(account);
 
@@ -59,19 +56,9 @@ function Profile() {
     const navigateToProfileEdit = () => {
         navigate(`/SoundSync/EditProfile`)
     }
-    const getFollowers = async () => {
-        const account = await getUser();
-        if (account) {
-            // setFollowers(account.followers);
-            console.log(account.followers);
-        }
-    }
-    const getFollowing = async () => {
-        const account = await getUser();
-        if (account) {
-            // setFollowing(account.following);
-            console.log(account.following);
-        }
+    const handleFollow = async () => {
+        const account = await findUserByUsername(userid);
+        // You can access currently logged in user with the 'user' useState variable declared in line 10
     }
     const goToUserProfile = (name) => {
         // setUsername(name);
@@ -79,13 +66,22 @@ function Profile() {
     }
     useEffect(() => {
         fetchUser();
-    },[goToUserProfile]);
+    }, [goToUserProfile]);
     return (
         <div className="mint-green-bg col">
             <div className="user-section row">
                 <div className="col user-info">
                     <div className="user-titles">
-                        <h1 className="user-name">{username}</h1>
+                        <div className="d-flex">
+                            <h1 className="user-name">{username}</h1>
+                            {(userid && userid != user.username) && (
+                                <button onClick={handleFollow} className="btn follow-btn">
+                                    {(isFollowing ? "Following" : "Not following")}
+                                </button>
+                            )}
+
+                        </div>
+
                         <div className="d-flex">
                             <a className="white text-decoration-none"> {numFollowers} Followers</a>
                             <a onClick={testing} className="margin-left-40px"> {numFollowing} Following</a>
