@@ -14,6 +14,8 @@ function Profile() {
     const [likedArtists, setLikedArtists] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [numFollowers, setNumFollowers] = useState(0);
+    const [numFollowing, setNumFollowing] = useState(0);
     const [isProfileOwner, setIsProfileOwner] = useState(false);
     const [currentProfileID, setCurrentProfileID] = useState([]);
 
@@ -32,22 +34,38 @@ function Profile() {
     }
     var isLoggedIn = false;
     const fetchUser = async () => {
+        var account = null;
+        if (!userid) {
+            account = await getUser();
+        } else {
+            account = await findUserByUsername(userid);
+        }
+        setUsername(account.username);
+        setNumFollowers(account.numFollowers);
+        setNumFollowing(account.numFollowing);
+        setLikedArtists(account.likedArtists);
+        console.log(account.followers);
+        setFollowers(account.followers);
 
-        const account = await getUser();
-        if (account) {
-            // isLoggedIn = true;
-            setUsername(account.username);
-            setCurrentProfileID(account._id);
-            // setUser(account);
-        }
+        console.log(account);
+
     }
-    const getLikedArtists = async () => {
-        const account = await getUser();
-        if (account) {
-            setLikedArtists(account.likedArtists);
-            console.log(account.likedArtists);
-        }
-    }
+    // const getLikedArtists = async () => {
+    //     if (!userid) {
+    //         const account = await getUser();
+    //         if (account) {
+    //             setLikedArtists(account.likedArtists);
+    //             console.log(account.likedArtists);
+    //         }
+    //     } else {
+    //         const account = await findUserByUsername(userid);
+    //         if (account) {
+    //             setLikedArtists(account.likedArtists);
+    //         }
+    //         console.log(account.likedArtists);
+    //     }
+
+    // }
     const getFollowers = async () => {
         const account = await getUser();
         if (account) {
@@ -62,27 +80,18 @@ function Profile() {
             console.log(account.following);
         }
     }
-    // const profileOwnerFlag = async () => {
-    //     const account = await getUser();
-    //     console.log(username);
-    //     if(account.username === username) {
-    //         setIsProfileOwner(true);
-    //     } else {
-    //         setIsProfileOwner(false);
-    //     }
-    // }
     const goToUserProfile = (name) => {
-        setUsername(name);
+        // setUsername(name);
         navigate(`/SoundSync/Profile/${name}`);
     }
     useEffect(() => {
         fetchUser();
-    })
+    },[]);
     useEffect(() => {
-        getLikedArtists();
+        // getLikedArtists();
         getFollowers();
         getFollowing();
-    }, [goToUserProfile]);
+    }, []);
     return (
         <div className="mint-green-bg col">
             <div className="user-section row">
@@ -90,8 +99,8 @@ function Profile() {
                     <div className="user-titles">
                         <h1 className="user-name">{username}</h1>
                         <div className="d-flex">
-                            <a className="white text-decoration-none"> 100 Followers</a>
-                            <a onClick={testing} className="margin-left-40px"> 1 Following</a>
+                            <a className="white text-decoration-none"> {numFollowers} Followers</a>
+                            <a onClick={testing} className="margin-left-40px"> {numFollowing} Following</a>
                             {(!userid) && (
                                 <a>Profile Settings</a>
                             )}
