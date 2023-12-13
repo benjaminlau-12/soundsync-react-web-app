@@ -45,7 +45,7 @@ function Profile() {
         setNumFollowing(account.numFollowing);
         setLikedArtists(account.likedArtists);
         console.log(account.followers);
-        setFollowers(account.followers);
+        // setFollowers(account.followers);
 
         console.log(account);
 
@@ -86,12 +86,7 @@ function Profile() {
     }
     useEffect(() => {
         fetchUser();
-    },[]);
-    useEffect(() => {
-        // getLikedArtists();
-        getFollowers();
-        getFollowing();
-    }, []);
+    },[goToUserProfile]);
     return (
         <div className="mint-green-bg col">
             <div className="user-section row">
