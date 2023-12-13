@@ -33,18 +33,43 @@ const Details = () => {
       setUser(account);
     };
 
-    const fetchLikes = async () => {
-      const likes = await likesClient.findUsersThatLikeAlbum(mediaId);
-      setLikes(likes);
-    };
+    // const fetchLikes = async () => {
+    //   const likes = await likesClient.findUsersThatLikeAlbum(mediaId);
+    //   setLikes(likes);
+    // };
   
+    // const currenUserLikesAlbum = async () => {
+    //   const _likes = await likesClient.createUserLikesAlbum(
+    //     user._id,
+    //     mediaId
+    //   );
+    //   setLikes([_likes, ...likes]);
+    // };
+
+    const fetchLikes = async () => {
+        try {
+          const likesData = await likesClient.findUsersThatLikeAlbum(mediaId);
+          setLikes((prevLikes) => ({
+            ...prevLikes,
+            [mediaId]: likesData || [], // Ensure likesData is an array
+          }));
+        } catch (error) {
+          console.error('Error fetching likes:', error);
+          // Handle the error or set default likes array
+          setLikes((prevLikes) => ({
+            ...prevLikes,
+            [mediaId]: [], // Set default value to an empty array or handle the error appropriately
+          }));
+        }
+      };
+
     const currenUserLikesAlbum = async () => {
-      const _likes = await likesClient.createUserLikesAlbum(
-        user._id,
-        mediaId
-      );
-      setLikes([_likes, ...likes]);
-    };
+        const _likes = await likesClient.createUserLikesAlbum(user._id, mediaId);
+        setLikes((prevLikes) => ({
+          ...prevLikes,
+          [mediaId]: prevLikes[mediaId] ? [_likes, ...prevLikes[mediaId]] : [_likes],
+        }));
+      };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,20 +120,25 @@ const Details = () => {
                             <p>Available Markets: {data.album?.available_markets.join(', ')}</p>
                             
                             <h2>Likes</h2>
-                            {likes ? (
-                              <ul className="list-group">
-                                {likes.map((like, index) => (
-                                  <li key={index} className="list-group-item">
-                                    {like.user.firstName} {like.user.lastName}
-                                    <Link to={`/SoundSync/users/${like.user._id}`}>
-                                      @{like.user.username}
-                                    </Link>
-                                  </li>
+                            {likes[mediaId] && likes[mediaId].length > 0 ? (
+                            <ul className="list-group">
+                                {likes[mediaId].map((like, index) => (
+                                <li key={index} className="list-group-item">
+                                    {like && like.user && (
+                                    <>
+                                        {like.user.firstName} {like.user.lastName}
+                                        <Link to={`/SoundSync/users/${like.user._id}`}>
+                                        @{like.user.username}
+                                        </Link>
+                                    </>
+                                    )}
+                                </li>
                                 ))}
-                              </ul>
+                            </ul>
                             ) : (
-                              <p>No likes available</p>
+                            <p>No likes available</p>
                             )}
+
                             {user && (
                               <button
                                 onClick={currenUserLikesAlbum}
