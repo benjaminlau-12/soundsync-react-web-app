@@ -86,6 +86,7 @@ const Login = () => {
                   } input-field rounded`}
                   id="name"
                   name="name"
+                  placeholder="John Doe"
                   required={isSigningUp}
                 />
                 <label htmlFor="username">Email</label>
@@ -94,6 +95,7 @@ const Login = () => {
                   className="form-control input-field rounded"
                   id="username"
                   name="username"
+                  placeholder="jdoe@gmail.com"
                   required
                 />
                 <label htmlFor="password">Password</label>
@@ -102,6 +104,7 @@ const Login = () => {
                   className="form-control input-field"
                   id="password"
                   name="password"
+                  placeholder="********"
                   required
                 />
                 <button
