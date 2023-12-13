@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./profile.css"
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router";
-import { getUser, findUserById } from "../Login/client";
+import { useNavigate, useParams } from "react-router";
+import { getUser, findUserById, findUserByUsername } from "../Login/client";
 
 function Profile() {
     const URL = "http://localhost:4000";
+    let { userid } = useParams();
     const [username, setUsername] = useState("Anonymous")
     // const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const [likedArtists, setLikedArtists] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [isProfileOwner, setIsProfileOwner] = useState(false);
     const [currentProfileID, setCurrentProfileID] = useState([]);
 
     function getArtistInitials(artistName) {
@@ -30,9 +32,10 @@ function Profile() {
     }
     var isLoggedIn = false;
     const fetchUser = async () => {
+
         const account = await getUser();
         if (account) {
-            isLoggedIn = true;
+            // isLoggedIn = true;
             setUsername(account.username);
             setCurrentProfileID(account._id);
             // setUser(account);
@@ -59,17 +62,27 @@ function Profile() {
             console.log(account.following);
         }
     }
+    // const profileOwnerFlag = async () => {
+    //     const account = await getUser();
+    //     console.log(username);
+    //     if(account.username === username) {
+    //         setIsProfileOwner(true);
+    //     } else {
+    //         setIsProfileOwner(false);
+    //     }
+    // }
     const goToUserProfile = (name) => {
         setUsername(name);
-        navigate(`/SoundSync/Profile/${name}`)
+        navigate(`/SoundSync/Profile/${name}`);
     }
     useEffect(() => {
-        // testing();
         fetchUser();
+    })
+    useEffect(() => {
         getLikedArtists();
         getFollowers();
         getFollowing();
-    }, []);
+    }, [goToUserProfile]);
     return (
         <div className="mint-green-bg col">
             <div className="user-section row">
@@ -79,6 +92,10 @@ function Profile() {
                         <div className="d-flex">
                             <a className="white text-decoration-none"> 100 Followers</a>
                             <a onClick={testing} className="margin-left-40px"> 1 Following</a>
+                            {(!userid) && (
+                                <a>Profile Settings</a>
+                            )}
+
                         </div>
                     </div>
                 </div>

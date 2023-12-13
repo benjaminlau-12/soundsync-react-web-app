@@ -7,6 +7,7 @@ import TopBar from "./TopBar/topbar";
 import Profile from "./Profile/profile";
 import Search from "./Search/search";
 import Details from "./Details/details";
+import { getUser } from "./Login/client";
 
 function SoundSync() {
     return (

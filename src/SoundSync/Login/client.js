@@ -41,3 +41,7 @@ export const signout = async () => {
   const response = await request.post(`${USERS_API}/signout`);
   return response.data;
 };
+export const findUserByUsername = async (username) => {
+  const response = await request.get(`${USERS_API}/username/${username}`);
+  return response.data;
+}
