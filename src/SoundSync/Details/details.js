@@ -8,6 +8,9 @@ import { BsArrowLeft } from 'react-icons/bs';
 import LoadingScreen from '../LoadingScreen/loading';
 import { useDispatch } from "react-redux";
 import { switchLoading } from "../../redux/loading";
+import { getUser } from "../Login/client";
+import * as likesClient from "../likes/client";
+import { Link } from 'react-router-dom';
 
 const Details = () => {
     const location = useLocation();
@@ -19,6 +22,29 @@ const Details = () => {
     const dispatch = useDispatch(); 
 
     const navigate = useNavigate();
+  
+    const [likes, setLikes] = useState([]);
+    const [mediaId, setMediaId] = useState(null);
+    const [user, setUser] = useState({ "username": "Log In" });
+    
+
+    const fetchUser = async () => {
+      const account = await getUser();
+      setUser(account);
+    };
+
+    const fetchLikes = async () => {
+      const likes = await likesClient.findUsersThatLikeAlbum(mediaId);
+      setLikes(likes);
+    };
+  
+    const currenUserLikesAlbum = async () => {
+      const _likes = await likesClient.createUserLikesAlbum(
+        user._id,
+        mediaId
+      );
+      setLikes([_likes, ...likes]);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +59,8 @@ const Details = () => {
             }
         };
         fetchData();
+        fetchLikes();
+        fetchUser();
     }, []);
 
     return (
@@ -65,6 +93,30 @@ const Details = () => {
                             <p>Total Tracks: {data.album?.total_tracks}</p>
                             <p>Artists: {data.album?.artists.map(artist => <a key={artist.id} href={artist.external_urls.spotify}>{artist.name}</a>)}</p>
                             <p>Available Markets: {data.album?.available_markets.join(', ')}</p>
+                            
+                            <h2>Likes</h2>
+                            {likes ? (
+                              <ul className="list-group">
+                                {likes.map((like, index) => (
+                                  <li key={index} className="list-group-item">
+                                    {like.user.firstName} {like.user.lastName}
+                                    <Link to={`/SoundSync/users/${like.user._id}`}>
+                                      @{like.user.username}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p>No likes available</p>
+                            )}
+                            {user && (
+                              <button
+                                onClick={currenUserLikesAlbum}
+                                className="btn btn-warning float-end"
+                              >
+                                Like
+                              </button>
+                            )}
                             </Card.Body>
                         </Card>
                         </Col>

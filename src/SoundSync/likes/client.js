@@ -12,11 +12,12 @@ export const createUserLikesAlbum = (userId, mediaId) => {
   );
   return response.data;
 };
-export const findAlbumsUserLikes = (userId) => {
+export const findAlbumsThatUserLikes = (userId) => {
   const response = request.get(`${LIKES_API}/users/${userId}/likes`);
   return response.data;
 };
-export const findUsersWhoLikeAlbum = (mediaId) => {
-  const response = request.get(`${LIKES_API}/albums/${mediaId}/likes`);
+export const findUsersThatLikeAlbum = (mediaId) => {
+  // const response = request.get(`${LIKES_API}/albums/${mediaId}/likes`);
+  const response = request.get(`${LIKES_API}/likes/${mediaId}/users`);
   return response.data;
 };
